@@ -1,42 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
+    
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CÁLCULO IMC</title>    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>CÁLCULO IMC</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
 </head>
 
 <body>
- <h1>Calcule seu IMC!</h1>
+<h1 class="text-center">Calcule seu IMC:</h1>		
+<form class="form-horizontal" role="form">
+<div class="container-fluid">
+<div class="row">
+<form class="form-group">
+<div class="col-md-2 col-md-offset-5">	
+<input type="text" name="num1" class="form-control" required><br>
+<input type="text" name="num2" class="form-control" p required><br>
 
- <?php 
+						
+<?php 
 
-$peso = 63;
-$altura = 1.80;
+if(isset($_GET['num1']) && $_GET['num2']):
 
-$imc = $peso / $altura ** 2;
+$num1 = $_GET['num1'];
+$num2 = pow($_GET['num2'], 2);
+$calcula = $num1 / $num2; 
+if($calcula <= 17):
+echo '<div class="alert alert-warning">Abaixo de 17 - Muito abaixo do peso</div>';
+elseif($calcula > 17 && $calcula <= 18.49):
+echo '<div class="alert alert-warning">Entre 17 e 18,49 - Abaixo do peso</div>';
+elseif($calcula >= 18.5 && $calcula <= 24.99):
+echo '<div class="alert alert-warning">Entre 18,5 e 24,99 - Peso normal</div>';					
+elseif($calcula >= 25 && $calcula <= 29.99):
+echo '<div class="alert alert-warning">Entre 25 e 29,99 - Acima do peso</div>';
+elseif($calcula >= 30 && $calcula <=34.99):
+echo '<div class="alert alert-warning">Entre 30 e 34,99 - Obesidade leve</div>';
+elseif($calcula >= 35 && $calcula <= 39.99):
+echo '<div class="alert alert-warning">Entre 35 e 39,99 - Obesidade moderada</div>';
+elseif($calcula >= 40):
+echo '<div class="alert alert-warning">Igual ou acima de 40 - Obesidade mórbida</div>';
 
- $calculadora = [
-    "18.5" => "Abaixo do peso",
-    "24.9" => "Peso normal",
-    "29.9" => "Acima do peso",
-    "34.9" => "Obesidade leve",
-    "39.9" => "Obesidade moderada",
-    "40.0" => "Obesidade mórbida"
-];
-foreach($calculadora as $key => $value){
-   
-    if((float) $key < 40.0){ //Se a chave for menor que 40, fica apto a testar todos os valores do IMC. 
-        if($imc <= (float) $key){
-            echo PHP_EOL."$value";
-            break;
-        }
-    }else{ //Se o IMC for maior ou igual a 40, equivale a última opção do teste "Obesidade grau III"
-        echo PHP_EOL."$value";
-    }
-}
- ?>
+endif;
+endif;
+
+?>
+
+<button type="submit" class="btn btn-lg btn-primary">CALCULAR!</button>
+</div>				
+</form>
+</div>
+</div>
+</form>		
+
+<script src="//code.jquery.com/jquery.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
 
 </body>
+
 </html>
