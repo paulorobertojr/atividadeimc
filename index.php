@@ -12,10 +12,10 @@
 
  <?php 
 
-$peso = 65;
-$altura = 1.63;
+$peso = 63;
+$altura = 1.80;
 
-$imc = $peso / ($altura ** 2);
+$imc = $peso / $altura ** 2;
 
  $calculadora = [
     "18.5" => "Abaixo do peso",
